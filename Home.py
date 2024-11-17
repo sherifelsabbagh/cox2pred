@@ -17,7 +17,7 @@ st.write("The first page can be used for prediction of multiple molecules provid
 st.write("The second page contains information regarding the built model performance.")
 st.write("You can find information about COX2 protein in the third page.")
 
-st.footer("© Faculty of Pharmacy, Galala university, 2024")
+st.info("© Faculty of Pharmacy, Galala university, 2024")
 
 
 
