@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Home")
 
-st.img("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSByQqTdmeNAG0Fhb7TAVN2X8BM9BOX6g0A0g&s")
+st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSByQqTdmeNAG0Fhb7TAVN2X8BM9BOX6g0A0g&s")
 st.title('COX2 Activity Prediction App')
 st.info('This App can be used to predict whether a molecule would be active or inactive against COX2 target protein.')
 
