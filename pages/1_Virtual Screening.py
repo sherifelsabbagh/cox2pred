@@ -6,6 +6,10 @@ import joblib
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.ML.Descriptors import MoleculeDescriptors
+from rdkit.Chem import PandasTools, Draw 
+from rdkit.Chem.Draw import IPythonConsole
+PandasTools.RenderImagesInAllDataFrames(images=True)
+
 
 st.set_page_config(
     page_title="Virtual Screening")
