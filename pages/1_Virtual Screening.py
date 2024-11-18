@@ -10,6 +10,12 @@ from rdkit.ML.Descriptors import MoleculeDescriptors
 st.set_page_config(
     page_title="Virtual Screening")
 
+
+st.header("Virtual Screening")
+st.warning("""
+[Please be sure that file format such this](https://drive.google.com/file/d/1Qa-0JKVa9ccuSMd4Km6Z5nP-RLeT1Gp0/view?usp=sharing)
+""")
+
 def PUbchemfp_desc_calc():
     # Performs the descriptor calculation
     bashCommand = "java -Xms2G -Xmx2G -Djava.awt.headless=true -jar ./PaDEL-Descriptor/PaDEL-Descriptor.jar -removesalt -standardizenitro -fingerprints  -descriptortypes ./PaDEL-Descriptor/PubchemFingerprinter.xml -dir ./ -file descriptors_output.csv"
@@ -29,12 +35,10 @@ def descriptors(smiles):
         Mol_descriptors.append(descriptors)
     return Mol_descriptors,desc_names 
     
-    
-    
 
 # Model
 def the_model(input_data):
-    load_model = joblib.load('model_1.0.2.pkl')
+    load_model = joblib.load(rf_model.pkl')
     # Make prediction
     prediction = load_model.predict(input_data)
     prediction_probability=load_model.predict_proba(input_data)
@@ -59,13 +63,7 @@ def the_model(input_data):
     st.write(Result)
     prediction_csv = Result.to_csv(index=False)
     st.download_button(label="Download prediction result",data=prediction_csv,file_name="My_result.csv")
-st.title('LRRK2 Activity Prediction App')
-st.info('The LRRK2 Activity Prediction App can be used to predict whether a  molecule is active or inactive for lrrk2 target protein .')
 
-st.header("Compound Virtual Screening")
-st.warning("""
-[Please be sure that file format such this](https://drive.google.com/file/d/1Qa-0JKVa9ccuSMd4Km6Z5nP-RLeT1Gp0/view?usp=sharing)
-""")
 
 
 uplouded_file=st.file_uploader("Please upload your input file", type=['txt'])
