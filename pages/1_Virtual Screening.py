@@ -38,7 +38,7 @@ def descriptors(smiles):
 
 # Model
 def the_model(input_data):
-    load_model = joblib.load(rf_model.pkl')
+    load_model = joblib.load('rf_model.pkl')
     # Make prediction
     prediction = load_model.predict(input_data)
     prediction_probability=load_model.predict_proba(input_data)
