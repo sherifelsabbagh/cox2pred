@@ -50,7 +50,7 @@ def the_model(input_data):
 
     #proba_output=pd.Series(prediction_probability,name="prediction_proba")
     
-    molecule_name = pd.Series(reading_data[1], name='Molecule Name')
+    molecule_name = pd.Series(reading_data["Molecule Name"], name='Molecule Name')
     
     Result= pd.concat([molecule_name, prediction_output,x], axis=1)
     
@@ -81,27 +81,21 @@ if st.button('Predict'):
     PUbchemfp_desc_calc()
 
  
-    st.subheader('Calculated Pubchem_Fingerprint descriptors')
+    st.subheader('Generated PubChem_Fingerprints')
     pubfp_calc = pd.read_csv("descriptors_output.csv")
     pubfp_calc.drop('Name', axis=1, inplace=True)
     st.write(pubfp_calc)
     st.write(pubfp_calc.shape)
-    # Read descriptor feature used in training
-    st.header('Descriptors Subset ')
-    feature_list = list(pd.read_csv('Pubchem_features.csv').columns)
-    desc_subset = pubfp_calc[feature_list]
-    st.write(desc_subset)
-    st.write(desc_subset.shape)
-    #st.download_button(label="Download PubchemFingerprinter subset Descriptor",data=desc_subset,file_name="Descriptor_subset.csv")
+   
     first_column = reading_data.iloc[:, 0] 
     Mol_descriptors,desc_names =descriptors(first_column)
     df_with_200_descriptors = pd.DataFrame(Mol_descriptors,columns=desc_names)
-    df=df_with_200_descriptors[["MolWt","MolLogP","NumHAcceptors","NumHDonors"]]
+    df=df_with_200_descriptors[["MolWt","Mol LogP","Num HAcceptors","Num HDonors"]]
     st.subheader("Lipinski Rule of 5 Descriptors")
     st.write(df)
     
     
-    the_model(desc_subset)
+    the_model(pubfp_calc)
 else:
     st.warning('Limit 250 compounds per file')
     
