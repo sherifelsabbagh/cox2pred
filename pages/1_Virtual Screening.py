@@ -50,7 +50,7 @@ def the_model(input_data):
 
     #proba_output=pd.Series(prediction_probability,name="prediction_proba")
     
-    molecule_name = pd.Series(reading_data[1], name='Compound Name')
+    molecule_name = pd.Series(reading_data[1], name='Molecule Name')
     
     Result= pd.concat([molecule_name, prediction_output,x], axis=1)
     
@@ -71,7 +71,7 @@ uplouded_file=st.file_uploader("Please upload your input file", type=['txt'])
 
 
 if st.button('Predict'):
-    reading_data = pd.read_table(uplouded_file, sep='\t', columns=["Smiles","Molecule Name"])
+    reading_data = pd.read_table(uplouded_file, sep='\t', names=["Smiles","Molecule Name"])
     reading_data.to_csv('molecule.smi', sep = '\t', index = False, header=None)
     st.subheader('input data')
     st.write(reading_data)
