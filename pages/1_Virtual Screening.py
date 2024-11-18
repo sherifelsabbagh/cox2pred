@@ -90,7 +90,7 @@ if st.button('Predict'):
     first_column = reading_data.iloc[:, 0] 
     Mol_descriptors,desc_names =descriptors(first_column)
     df_with_200_descriptors = pd.DataFrame(Mol_descriptors,columns=desc_names)
-    df=df_with_200_descriptors[["MolWt","Mol LogP","Num HAcceptors","Num HDonors"]]
+    df=df_with_200_descriptors[["MolWt","MolLogP","NumHAcceptors","NumHDonors"]]
     st.subheader("Lipinski Rule of 5 Descriptors")
     st.write(df)
     
