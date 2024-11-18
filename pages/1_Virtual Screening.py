@@ -6,10 +6,6 @@ import joblib
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.ML.Descriptors import MoleculeDescriptors
-from rdkit.Chem import PandasTools, Draw 
-from rdkit.Chem.Draw import IPythonConsole
-PandasTools.RenderImagesInAllDataFrames(images=True)
-
 
 st.set_page_config(
     page_title="Virtual Screening")
@@ -76,9 +72,9 @@ uplouded_file=st.file_uploader("Please upload your input file", type=['txt'])
 
 if st.button('Predict'):
     reading_data = pd.read_table(uplouded_file, sep=' ', names=["Smiles","Molecule Name"])
-    mols = [Chem.MolFromSmiles(smi) for smi in reading_data["Smiles"]]
-    reading_data["Mol"]= mols
-    reading_data.drop("Mol",axis=1).to_csv('molecule.smi', sep = '\t', index = False, header=None)
+##  mols = [Chem.MolFromSmiles(smi) for smi in reading_data["Smiles"]]
+  ##  reading_data["Mol"]= mols
+    reading_data.to_csv('molecule.smi', sep = '\t', index = False, header=None)
     st.subheader('Input data')
     st.write(reading_data)
 
