@@ -62,7 +62,7 @@ def the_model(input_data):
             result.append("Inactive")
     Result["Result"]=result
     st.write(Result)
-    prediction_csv = Result.to_csv(index=False,sep=";")
+    prediction_csv = Result.to_csv(index=False,sep=",")
     st.download_button(label="Download prediction results",data=prediction_csv,file_name="vs_results.csv")
 
 
