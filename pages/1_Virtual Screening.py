@@ -43,13 +43,14 @@ def the_model(input_data):
     prediction = load_model.predict(input_data)
     prediction_probability=load_model.predict_proba(input_data)
     
-    x=pd.DataFrame(prediction_probability,columns=["Inactive probability","Active_probability"])
+    x=pd.DataFrame(prediction_probability,columns=["Pi","Pa"])
     st.header('Prediction Result')
     
-    prediction_output = pd.Series(prediction, name='Activity')
+    prediction_output = pd.Series(prediction, name='Result')
+
     #proba_output=pd.Series(prediction_probability,name="prediction_proba")
     
-    molecule_name = pd.Series(reading_data[1], name='Molecule CHEMBL id/Molecule Name ')
+    molecule_name = pd.Series(reading_data[1], name='Compound Name')
     
     Result= pd.concat([molecule_name, prediction_output,x], axis=1)
     
@@ -62,7 +63,7 @@ def the_model(input_data):
     Result["Activity"]=result
     st.write(Result)
     prediction_csv = Result.to_csv(index=False)
-    st.download_button(label="Download prediction result",data=prediction_csv,file_name="My_result.csv")
+    st.download_button(label="Download prediction result",data=prediction_csv,file_name="vs_results.csv")
 
 
 
@@ -70,9 +71,9 @@ uplouded_file=st.file_uploader("Please upload your input file", type=['txt'])
 
 
 if st.button('Predict'):
-    reading_data = pd.read_table(uplouded_file, sep='\t', header=None)
-    reading_data.to_csv('molecule.smi', sep = '\t', index = False,header=None)
-    st.subheader('The input data')
+    reading_data = pd.read_table(uplouded_file, sep='\t', columns=["Smiles","Molecule Name"])
+    reading_data.to_csv('molecule.smi', sep = '\t', index = False, header=None)
+    st.subheader('input data')
     st.write(reading_data)
 
 
