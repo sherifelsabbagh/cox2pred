@@ -71,9 +71,9 @@ uplouded_file=st.file_uploader("Please upload your input file", type=['txt'])
 
 
 if st.button('Predict'):
-    reading_data = pd.read_table(uplouded_file, sep='\t', names=["Smiles","Molecule Name"])
+    reading_data = pd.read_table(uplouded_file, sep=' ', names=["Smiles","Molecule Name"])
     reading_data.to_csv('molecule.smi', sep = '\t', index = False, header=None)
-    st.subheader('input data')
+    st.subheader('Input data')
     st.write(reading_data)
 
 
