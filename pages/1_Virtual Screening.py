@@ -52,7 +52,7 @@ def the_model(input_data):
     
     molecule_name = pd.Series(reading_data["Molecule Name"], name='Molecule Name')
     
-    Result= pd.concat([molecule_name, prediction_output,x], axis=1)
+    Result= pd.concat([molecule_name, x, prediction_output], axis=1)
     
     result = []
     for x in Result["Result"]:
