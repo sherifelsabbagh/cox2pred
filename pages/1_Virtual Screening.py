@@ -55,12 +55,12 @@ def the_model(input_data):
     Result= pd.concat([molecule_name, prediction_output,x], axis=1)
     
     result = []
-    for x in Result["Activity"]:
+    for x in Result["Result"]:
         if x==1:
             result.append("Active")
         if x==0:
             result.append("Inactive")
-    Result["Activity"]=result
+    Result["Result"]=result
     st.write(Result)
     prediction_csv = Result.to_csv(index=False)
     st.download_button(label="Download prediction result",data=prediction_csv,file_name="vs_results.csv")
