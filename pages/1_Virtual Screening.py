@@ -73,8 +73,8 @@ uplouded_file=st.file_uploader("Please upload your input file", type=['txt'])
 if st.button('Predict'):
     reading_data = pd.read_table(uplouded_file, sep=' ', names=["Smiles","Molecule Name"])
     mols = [Chem.MolFromSmiles(smi) for smi in reading_data["Smiles"]]
-    reading_data = reading_data.join(mols)
-    reading_data.drop("mols",axis=1).to_csv('molecule.smi', sep = '\t', index = False, header=None)
+    reading_data["Mol"]= mols
+    reading_data.drop("Mol",axis=1).to_csv('molecule.smi', sep = '\t', index = False, header=None)
     st.subheader('Input data')
     st.write(reading_data)
 
