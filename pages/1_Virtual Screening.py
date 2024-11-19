@@ -6,6 +6,9 @@ import joblib
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.ML.Descriptors import MoleculeDescriptors
+from rdkit.Chem import Draw
+from io import BytesIO
+import base64
 
 st.set_page_config(
     page_title="Virtual Screening")
@@ -34,6 +37,18 @@ def descriptors(smiles):
         descriptors = calc.CalcDescriptors(mol)
         Mol_descriptors.append(descriptors)
     return Mol_descriptors,desc_names 
+
+def smiles_to_image(smiles, mol_size=(200, 200)):
+    mol = Chem.MolFromSmiles(smiles)
+    if mol:
+        img = Draw.MolToImage(mol, size=mol_size)
+        buffer = BytesIO()
+        img.save(buffer, format="PNG")
+        buffer.seek(0)
+        img_str = base64.b64encode(buffer.read()).decode()
+        return f'<img src="data:image/png;base64,{img_str}" alt="Molecule">'
+    else:
+        return "Invalid SMILES"	
     
 
 # Model
@@ -72,11 +87,11 @@ uplouded_file=st.file_uploader("Please upload your input file", type=['txt'])
 
 if st.button('Predict'):
     reading_data = pd.read_table(uplouded_file, sep=' ', names=["Smiles","Molecule Name"])
-##  mols = [Chem.MolFromSmiles(smi) for smi in reading_data["Smiles"]]
-  ##  reading_data["Mol"]= mols
     reading_data.to_csv('molecule.smi', sep = '\t', index = False, header=None)
+    reading_data['Structure'] = reading_data['Smiles'].apply(smiles_to_image)
     st.subheader('Input data')
-    st.write(reading_data)
+    st.markdown(reading_data.to_html(escape=False, index=False), unsafe_allow_html=True)
+   ## st.write(reading_data)
 
 
 
