@@ -12,9 +12,9 @@ st.write("We chosed PubChem fingerprints for building the model using RandomFore
 
 
 with st.expander('Performance', expanded=True):
-    st.write("Sensitivity (SN) : 71%")
-    st.write("Specificity (SP) : 91%")
-    st.write("Matthews’s correlation coefficient (MCC) : 0.61")
-    st.write("Accuracy (Q) : 86%")
+    st.write("Sensitivity (SN) : 90%")
+    st.write("Specificity (SP) : 64%")
+    st.write("Matthews’s correlation coefficient (MCC) : 0.52")
+    st.write("Accuracy (Q) : 84%")
     Auc_i = Image.open('AUC.png')
     st.image(Auc_i, use_column_width=True)
